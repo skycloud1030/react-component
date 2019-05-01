@@ -1,0 +1,26 @@
+.headerColumn {
+    text-transform: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .headerColumn > i {
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+  .headerRow {
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    -o-user-select: none;
+    user-select: none;
+  }
+  .headerRow,
+  .evenRow,
+  .oddRow {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .evenRow {
+    background-color: #fafafa;
+  }
+  

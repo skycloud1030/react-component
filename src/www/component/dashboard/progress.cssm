@@ -1,0 +1,11 @@
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+}
+
+.subTitle {
+  font-size: 14px;
+  margin-top: 12px;
+}

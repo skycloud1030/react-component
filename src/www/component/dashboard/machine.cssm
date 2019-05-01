@@ -1,0 +1,21 @@
+.title {
+  min-height: 32px;
+}
+.healthy {
+  color: #52c41a;
+  margin-right: 8px;
+  font-size: 26px;
+  vertical-align: middle;
+}
+.error {
+  color: #f5222d;
+  margin-right: 8px;
+  font-size: 26px;
+  vertical-align: middle;
+}
+.loading {
+  color: #1890ff;
+  margin-right: 8px;
+  font-size: 26px;
+  vertical-align: middle;
+}
