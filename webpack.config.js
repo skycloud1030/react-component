@@ -19,7 +19,7 @@ var config = {
     ]
   },
   entry: {
-    home: [path.resolve(__dirname, "src/index.js")]
+    index: [path.resolve(__dirname, "src/www/index.js")]
   },
   output: {
     publicPath: "./",
@@ -34,7 +34,7 @@ var config = {
     new CopyWebpackPlugin([{ from: "src/assert", to: "./" }]),
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: "./src/index.html"
+      template: "./src/www/index.html"
     }),
     new AutoDllPlugin({
       filename: "packages-[name].[contenthash:4].dll.js",
@@ -53,14 +53,12 @@ var config = {
   performance: { hints: false },
   externals: {
     react: "React",
-    "react-dom": "ReactDOM"
+    "react-dom": "ReactDOM",
+    immutable: "Immutable"
   },
   resolve: {
     alias: {
-      // Actions: path.resolve(__dirname, "src/actions/"),
-      // Components: path.resolve(__dirname, "src/components/"),
-      // Container: path.resolve(__dirname, "src/container/"),
-      // Commons: path.resolve(__dirname, "src/components/")
+      Components: path.resolve(__dirname, "src/components/")
     }
   },
   module: {
@@ -186,4 +184,10 @@ var config = {
     ]
   }
 };
-module.exports = config;
+module.exports = (env, argv) => {
+  if (argv.mode === "development") {
+  }
+  if (argv.mode === "production") {
+  }
+  return config;
+};
