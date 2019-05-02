@@ -1,3 +1,13 @@
 .capitalize {
   text-transform: capitalize;
 }
+
+.rowCard {
+  background-color: transparent;
+}
+.result :global .ant-card-body {
+  padding: 0px;
+}
+.rowCard :global .ant-card-body {
+  padding: 24px;
+}

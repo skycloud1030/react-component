@@ -1,14 +1,19 @@
 import React, { useCallback, useState, useEffect, useMemo } from "react";
 import Table, { Column, sortHeaderRenderer } from "Components/react-virtualized-table";
+import RCList from "Components/react-virtualized-table/list.js";
 import { List } from "immutable";
 import { Badge } from "antd";
 import { Card } from "antd";
 import { BackTop } from "antd";
+import { Avatar } from "antd";
+import { Tag } from "antd";
+import Media from "react-media";
 import _ from "lodash";
 import severity from "../../actions/severity.js";
 import API from "../../actions/api.js";
 import styles from "./index.cssm";
 
+const { Meta } = Card;
 const cellRenderer = {
   time: ({ cellData }) => moment(cellData).format("MM-DD HH:mm:ss"),
   catalog: ({ cellData }) => <span className={styles.capitalize}>{cellData}</span>,
@@ -44,8 +49,40 @@ function TableCompoent() {
     return value;
   }, [data, sort.sortBy, sort.sortDirection]);
 
-  return (
-    <Card>
+  const _rowRenderer = useCallback(
+    index => {
+      const data = sortData.get(index) || {};
+      const { color } = severity(data.level);
+      return (
+        <Card bordered={false} className={styles.rowCard}>
+          <Meta
+            avatar={
+              <Avatar size="large" style={{ backgroundColor: color }}>
+                {data.level}
+              </Avatar>
+            }
+            title={cellRenderer.time({ cellData: data.time })}
+            description={data.name}
+            style={{ marginBottom: 24 }}
+          />
+          <div style={{ marginBottom: 24 }}>
+            <Tag color="blue">{data.catalog}</Tag>
+          </div>
+          <div className={styles.content}>
+            <span title={data.content}>{data.content}</span>
+          </div>
+        </Card>
+      );
+    },
+    [sortData]
+  );
+
+  const _renderList = useMemo(() => {
+    return <RCList rowCount={sortData.size} rowRenderer={_rowRenderer} />;
+  }, [sortData]);
+
+  const _renderTable = useMemo(() => {
+    return (
       <Table
         rowCount={sortData.size}
         rowGetter={({ index }) => sortData.get(index)}
@@ -78,6 +115,12 @@ function TableCompoent() {
         />
         <Column width={600} label="Content" dataKey="content" headerRenderer={sortHeaderRenderer} />
       </Table>
+    );
+  }, [sortData]);
+
+  return (
+    <Card className={styles.result} bordered={false}>
+      <Media query="(min-width: 992px)">{matches => (matches ? _renderTable : _renderList)}</Media>
       <BackTop />
     </Card>
   );
