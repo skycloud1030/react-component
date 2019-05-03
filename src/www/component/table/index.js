@@ -7,6 +7,8 @@ import { Card } from "antd";
 import { BackTop } from "antd";
 import { Avatar } from "antd";
 import { Tag } from "antd";
+// import { Row, Col } from "antd";
+import Form from "./form.js";
 import Media from "react-media";
 import _ from "lodash";
 import severity from "../../actions/severity.js";
@@ -25,15 +27,24 @@ const cellRenderer = {
 
 function TableCompoent() {
   const [data, setData] = useState(List([]));
+  const [loading, setLoading] = useState(true);
   const [api] = useState(() => new API());
+  const [form, setForm] = useState({ dateTag: "24h" });
   const [sort, setSort] = useState({ sortBy: "time", sortDirection: "DESC" });
   const _sort = useCallback(({ sortBy, sortDirection }) => setSort({ sortBy, sortDirection }), []);
 
   useEffect(() => {
-    let fet = api.RESTfulCall("/logs");
-    fet.then(data => setData(List(data)));
+    const { dateTag } = form;
+    let fet = api.getLogs({ dateTag });
+    setLoading(true);
+    fet.then(data => {
+      setData(List(data));
+      _.delay(() => setLoading(false), 300);
+    });
     return () => fet && fet.abort();
-  }, []);
+  }, [form.dateTag]);
+
+  const onSubmit = useCallback(form => setForm(form), []);
 
   const sortData = useMemo(() => {
     const { sortDirection, sortBy } = sort;
@@ -119,10 +130,15 @@ function TableCompoent() {
   }, [sortData]);
 
   return (
-    <Card className={styles.result} bordered={false}>
-      <Media query="(min-width: 992px)">{matches => (matches ? _renderTable : _renderList)}</Media>
-      <BackTop />
-    </Card>
+    <React.Fragment>
+      <Card style={{ marginBottom: 24 }}>
+        <Form onSubmit={onSubmit} />
+      </Card>
+      <Card className={styles.result} bordered={false} loading={loading}>
+        <Media query="(min-width: 992px)">{matches => (matches ? _renderTable : _renderList)}</Media>
+        <BackTop />
+      </Card>
+    </React.Fragment>
   );
 }
 

@@ -53,7 +53,7 @@ function Main(props) {
             {_renderContent}
           </Box>
         </main>
-        <footer />
+        <footer className={styles.footer} />
       </section>
     </section>
   );

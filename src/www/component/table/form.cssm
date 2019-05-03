@@ -1,0 +1,28 @@
+.timer {
+  border-bottom: 1px dashed #e8e8e8;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+.timer:last-child {
+  border-bottom: 0px;
+}
+.radio {
+  margin-right: 24px;
+  display: inline-block;
+}
+.rangePicker {
+  display: inline-block;
+  margin-right: 24px;
+}
+@media screen and (max-width: 992px) {
+  .rangePicker {
+    display: none;
+  }
+}
+.label {
+  margin-right: 16px;
+  display: inline-block;
+}
+.tagSelet {
+  display: inline-block;
+}

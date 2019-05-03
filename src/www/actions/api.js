@@ -1,5 +1,5 @@
 import AbortController from "./abortController.js";
-import fetch from "./fetch.js";
+import fetchFake from "./fetch.js";
 import _ from "lodash";
 
 export default class API {
@@ -11,9 +11,12 @@ export default class API {
     };
     return this.RESTfulCall(url, option);
   };
+  getLogs = ({ dateTag }) => {
+    return this.RESTfulCall(`/logs`, { dateTag });
+  };
   RESTfulCall = (url, options) => {
     const fet = AbortController(
-      fetch(`/api${url}`, options)
+      fetchFake(`/api${url}`, options)
         .then(res => (res.json ? res.json() : res))
         .then(data => {
           return new Promise(resolve => {

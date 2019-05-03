@@ -1,5 +1,6 @@
 import _ from "lodash";
 import faker from "faker";
+import moment from "moment";
 
 const machine_list = [
   { name: "machine710", ip: "127.0.0.1" },
@@ -11,11 +12,35 @@ const machine_list = [
 const catalog = ["System", "Security", "Configuration"];
 const level = ["Info", "Warning", "Error"];
 
-export default function fetchFake(url) {
+const getDateRange = key => {
+  const today = moment();
+  let startDate = today.clone();
+  let endDate = today.clone();
+  let count;
+  switch (key) {
+    case "1m":
+      startDate = startDate.subtract(1, "month");
+      count = 1500;
+      break;
+    case "7d":
+      startDate = startDate.subtract(7, "day");
+      count = 500;
+      break;
+    case "24h":
+      startDate = startDate.subtract(1, "day");
+      count = 100;
+      break;
+  }
+  return { startDate, endDate, count };
+};
+
+export default function fetchFake(url, params) {
   return new Promise(resolve => {
     switch (url) {
       case "/api/logs": {
-        const data = _.times(1000, () => {
+        const { dateTag } = params;
+        const { startDate, endDate, count = 100 } = getDateRange(dateTag);
+        const data = _.times(count, () => {
           const machine = faker.random.arrayElement(machine_list);
           return {
             name: machine.name,
@@ -23,7 +48,7 @@ export default function fetchFake(url) {
             catalog: faker.random.arrayElement(catalog),
             content: faker.hacker.phrase(),
             level: faker.random.arrayElement(level),
-            time: faker.date.between("2019-04-20", "2019-04-28")
+            time: faker.date.between(startDate.format("YYYY-MM-DD"), endDate.format("YYYY-MM-DD"))
           };
         });
         resolve(data);
@@ -55,7 +80,7 @@ export default function fetchFake(url) {
         break;
       }
       case "/api/monitor/disk": {
-        const data = _.times(30, index => {
+        const data = _.times(50, index => {
           return {
             bay: index + 1,
             capacity: _.random(512 * 1024 * 1024 * 1024, 1024 * 1024 * 1024 * 1024),
