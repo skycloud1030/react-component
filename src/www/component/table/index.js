@@ -105,7 +105,7 @@ function TableCompoent() {
           headerRenderer={sortHeaderRenderer}
         />
         <Column width={200} label="Array" dataKey="name" headerRenderer={sortHeaderRenderer} />
-        <Column width={200} label="IP" dataKey="ip" headerRenderer={sortHeaderRenderer} />
+        <Column width={150} label="IP" dataKey="ip" headerRenderer={sortHeaderRenderer} />
         <Column
           width={100}
           label="Catalog"
@@ -113,7 +113,7 @@ function TableCompoent() {
           cellRenderer={cellRenderer.catalog}
           headerRenderer={sortHeaderRenderer}
         />
-        <Column width={600} label="Content" dataKey="content" headerRenderer={sortHeaderRenderer} />
+        <Column width={800} label="Content" dataKey="content" headerRenderer={sortHeaderRenderer} />
       </Table>
     );
   }, [sortData]);

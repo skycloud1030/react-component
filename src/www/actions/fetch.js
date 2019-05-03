@@ -9,12 +9,6 @@ const machine_list = [
 ];
 
 const catalog = ["System", "Security", "Configuration"];
-const content = [
-  "Start compression task for 0 volumes",
-  "Apply changes; modules: iscsitarget",
-  "Change iSCSI target settings of lab07-clone",
-  "Start deduplication task for 0 volumes"
-];
 const level = ["Info", "Warning", "Error"];
 
 export default function fetchFake(url) {
@@ -27,7 +21,7 @@ export default function fetchFake(url) {
             name: machine.name,
             ip: machine.ip,
             catalog: faker.random.arrayElement(catalog),
-            content: faker.random.arrayElement(content),
+            content: faker.hacker.phrase(),
             level: faker.random.arrayElement(level),
             time: faker.date.between("2019-04-20", "2019-04-28")
           };
