@@ -60,6 +60,53 @@ export default function fetchFake(url) {
         resolve(data);
         break;
       }
+      case "/api/monitor/disk": {
+        const data = _.times(30, index => {
+          return {
+            bay: index + 1,
+            capacity: _.random(512 * 1024 * 1024 * 1024, 1024 * 1024 * 1024 * 1024),
+            health: _.random(0, 99),
+            model: "TOSHIBA DT01ACA100",
+            serialnumber: "2015_" + faker.random.number()
+          };
+        });
+
+        const power = [
+          { key: "1.05V PCH", state: "ok", value: "1.041" },
+          { key: "1.05V PCH", state: "ok", value: "1.218" },
+          { key: "1.5V PCH", state: "ok", value: "1.500" },
+          { key: "12V", state: "ok", value: "12.063" },
+          { key: "3.3VCC", state: "ok", value: "3.316" },
+          { key: "3.3VSB", state: "ok", value: "3.316" },
+          { key: "5VCC", state: "ok", value: "5.026" },
+          { key: "5VSB", state: "ok", value: "4.948" }
+        ];
+
+        const temperature = [
+          { key: "P1-DIMMA1 Temp", state: "ok", value: "32.000" },
+          { key: "P1-DIMMA2 Temp", state: "error", value: "50" },
+          { key: "P1-DIMMB1 Temp", state: "error", value: "60.000" },
+          { key: "P1-DIMMB2 Temp", state: "ok", value: "32.000" },
+          { key: "P1-DIMMC1 Temp", state: "ok", value: "31.000" },
+          { key: "P1-DIMMC2 Temp", state: "ok", value: "29.000" },
+          { key: "P1-DIMMD1 Temp", state: "ok", value: "29.000" },
+          { key: "P1-DIMMD2 Temp", state: "ok", value: "29.000" }
+        ];
+
+        const fan = [
+          { key: "FAN1", state: "ok", value: "2700.000" },
+          { key: "FAN2", state: "ok", value: "2700.000" },
+          { key: "FAN3", state: "ok", value: "4000.000" },
+          { key: "FAN4", state: "ok", value: "2700.000" },
+          { key: "FAN5", state: "ok", value: "3800.000" },
+          { key: "FAN5", state: "na", value: "na" },
+          { key: "FANA", state: "na", value: "na" },
+          { key: "FANB", state: "na", value: "na" }
+        ];
+
+        resolve({ disk_list: data, power, temperature, fan });
+        break;
+      }
       default:
         resolve([]);
         break;

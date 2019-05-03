@@ -1,0 +1,117 @@
+.machine {
+  height: 200px;
+  padding: 5px;
+  border: solid 1px #c3c3c3;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.machinecontainer {
+  height: 100%;
+  width: 100%;
+  display: inline-flex;
+}
+
+.flash {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 12.5%;
+  height: 100%;
+  max-width: 60px;
+  min-width: 6px;
+}
+
+.flashcontainer {
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+}
+
+.flashContent {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: #c2d1e8;
+  border: solid 2px #85a5d3;
+  border-radius: 4px;
+  color: #000;
+}
+
+.flashContent:hover {
+  border: dotted 2px #1890ff;
+  color: #1890ff;
+  padding: 0px;
+}
+
+.critical {
+  background-color: #f5222d;
+  border: solid 2px #a3131b;
+}
+.degraded {
+  background-color: #faad14;
+  border: solid 2px #c28710;
+}
+.healthy {
+  background-color: #c2d1e8;
+}
+.unknown {
+  background-color: #fff;
+  border: solid 2px #000;
+}
+.unknown .dot {
+  background-color: #d9d9d9;
+}
+.healthy .dot {
+  background-color: #52c41a;
+}
+.critical .dot {
+  background-color: #f5222d;
+}
+
+.bay {
+  display: -ms-grid;
+}
+
+@media only screen and (max-width: 1200px) {
+  .bay {
+    display: none;
+  }
+  .flashContent {
+    border: 1px solid transparent;
+  }
+  .unknown {
+    background-color: #c3c3c3;
+  }
+}
+
+.flashContent .header {
+  width: 100%;
+  height: 20%;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  text-align: center;
+}
+
+.flashContent .body {
+  width: 100%;
+  height: 60%;
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.flashContent .footer {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.dot {
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  vertical-align: middle;
+  border-radius: 50%;
+}

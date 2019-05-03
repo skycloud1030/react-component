@@ -11,6 +11,7 @@ export const Router_List = () => (
       <Route exact path="/" render={() => <Redirect to="/table" />} />
       <Route exact path="/table" component={Main} />
       <Route exact path="/dashboard" component={Main} />
+      <Route exact path="/monitor" component={Main} />
       <Route path="*" component={Route404} />
     </Switch>
   </ConnectedRouter>

@@ -1,0 +1,48 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+.info .row {
+  margin-bottom: 12px;
+}
+
+.icon {
+  font-size: 48px;
+  cursor: pointer;
+}
+.icon:hover {
+  color: #1890ff;
+}
+.title {
+  border-bottom: 1px solid #fff;
+}
+.tipRow {
+  display: flex;
+  align-items: center;
+  max-width: 200px;
+}
+.tipRow .text {
+  flex: 1 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-right: 12px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .info {
+    flex-direction: row;
+    height: 60px;
+  }
+}
+
+.tabs :global .ant-tabs-tab {
+  height: inherit;
+}
+.tabs .icon {
+  margin-right: 0px;
+  font-size: 32px;
+}

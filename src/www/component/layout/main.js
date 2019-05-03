@@ -17,9 +17,15 @@ const Table = Loadable({
   loading: Loading
 });
 
+const Monitor = Loadable({
+  loader: () => import(/* webpackChunkName: "react-monitor" */ "../monitor/index.js"),
+  loading: Loading
+});
+
 const pathComponet = {
   "/dashboard": Dashboard,
-  "/table": Table
+  "/table": Table,
+  "/monitor": Monitor
 };
 
 function Main(props) {

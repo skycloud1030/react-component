@@ -40,6 +40,10 @@ function Sider(props) {
           <Icon type="dashboard" />
           Dasboard
         </Menu.Item>
+        <Menu.Item key="/monitor">
+          <Icon type="cloud" />
+          Monitor
+        </Menu.Item>
       </Menu>
     );
   }, [selectedKeys]);
