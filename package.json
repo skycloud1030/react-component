@@ -19,6 +19,7 @@
     "dygraphs": "git+https://github.com/skycloud1030/dygraphs.git#npm",
     "echarts": "^4.2.1",
     "faker": "^4.1.0",
+    "fbemitter": "^2.1.1",
     "history": "^4.9.0",
     "immutable": "^4.0.0-rc.12",
     "intersection-observer": "^0.6.0",

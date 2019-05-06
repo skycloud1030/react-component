@@ -126,7 +126,7 @@ export default function fetchFake(url, params) {
           { key: "FANB", state: "na", value: "na" }
         ];
 
-        resolve({ disk_list: data, power, temperature, fan });
+        resolve({ healthy: data, power, temperature, fan });
         break;
       }
       default:

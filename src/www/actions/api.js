@@ -14,6 +14,9 @@ export default class API {
   getLogs = ({ dateTag, severity }) => {
     return this.RESTfulCall(`/logs`, { dateTag, severity });
   };
+  getIOPS = () => {
+    return this.RESTfulCall(`/iops`);
+  };
   RESTfulCall = (url, options) => {
     const fet = AbortController(
       fetchFake(`/api${url}`, options)
