@@ -16,10 +16,10 @@ function sortHeaderRenderer({ dataKey, label, sortBy, sortDirection }) {
   let icon;
   switch (true) {
     case sortBy === dataKey && sortDirection === "DESC":
-      icon = <Icon type="sort-ascending" theme="outlined" />;
+      icon = <Icon type="sort-descending" />;
       break;
     case sortBy === dataKey && sortDirection === "ASC":
-      icon = <Icon type="sort-descending" theme="outlined" />;
+      icon = <Icon type="sort-ascending" />;
       break;
   }
   return (

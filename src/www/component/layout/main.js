@@ -38,7 +38,7 @@ function Main(props) {
 
   const Box = useMemo(() => {
     return posed.div({
-      init: { opacity: 0 },
+      init: { opacity: 0.3 },
       visible: { opacity: 1, transition: { duration: 1000 } }
     });
   }, [path]);
@@ -46,15 +46,13 @@ function Main(props) {
   return (
     <section>
       <C_Sider />
-      <section className={styles.content}>
-        <C_Header />
-        <main className={styles.main}>
-          <Box pose="visible" initialPose="init">
-            {_renderContent}
-          </Box>
-        </main>
-        <footer className={styles.footer} />
-      </section>
+      <Box pose="visible" initialPose="init">
+        <section className={styles.content}>
+          <C_Header />
+          <main className={styles.main}>{_renderContent}</main>
+          <footer className={styles.footer} />
+        </section>
+      </Box>
     </section>
   );
 }

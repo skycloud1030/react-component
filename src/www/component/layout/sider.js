@@ -55,7 +55,7 @@ function Sider(props) {
             <aside className={styles.sider}>
               <div className={styles.logo}>
                 <div>
-                  <IconFont type="icon-dingwei" className={styles.icon} />
+                  <IconFont type="icon-react" className={styles.icon} />
                   <h1>React</h1>
                 </div>
               </div>

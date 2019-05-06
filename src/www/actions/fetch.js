@@ -10,7 +10,7 @@ const machine_list = [
 ];
 
 const catalog = ["System", "Security", "Configuration"];
-const level = ["Info", "Warning", "Error"];
+const level = ["info", "warning", "error"];
 
 const getDateRange = key => {
   const today = moment();
@@ -38,9 +38,9 @@ export default function fetchFake(url, params) {
   return new Promise(resolve => {
     switch (url) {
       case "/api/logs": {
-        const { dateTag } = params;
+        const { dateTag, severity } = params;
         const { startDate, endDate, count = 100 } = getDateRange(dateTag);
-        const data = _.times(count, () => {
+        let data = _.times(count, () => {
           const machine = faker.random.arrayElement(machine_list);
           return {
             name: machine.name,
@@ -51,6 +51,9 @@ export default function fetchFake(url, params) {
             time: faker.date.between(startDate.format("YYYY-MM-DD"), endDate.format("YYYY-MM-DD"))
           };
         });
+        if (!_.isEmpty(severity)) {
+          data = _.filter(data, item => _.includes(severity, item.level));
+        }
         resolve(data);
         break;
       }

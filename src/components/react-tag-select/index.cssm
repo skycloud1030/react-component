@@ -1,0 +1,34 @@
+.tagSelect {
+  user-select: none;
+  position: relative;
+  max-height: 32px;
+  line-height: 32px;
+}
+.tagSelect :global .ant-tag {
+  padding: 0 8px;
+  margin-right: 12px;
+  font-size: 14px;
+}
+
+.tagSelect :global .ant-tag-checkable {
+  border: 1px solid #d9d9d9;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+.tagSelect :global .ant-tag-checkable-checked {
+  border: 1px solid transparent;
+}
+.expanded {
+  max-height: 200px;
+}
+.trigger {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.trigger i {
+  font-size: 12px;
+}
+.hasExpandTag {
+  padding-right: 50px;
+}

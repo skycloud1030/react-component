@@ -7,7 +7,6 @@ import { Card } from "antd";
 import { BackTop } from "antd";
 import { Avatar } from "antd";
 import { Tag } from "antd";
-// import { Row, Col } from "antd";
 import Form from "./form.js";
 import Media from "react-media";
 import _ from "lodash";
@@ -29,23 +28,22 @@ function TableCompoent() {
   const [data, setData] = useState(List([]));
   const [loading, setLoading] = useState(true);
   const [api] = useState(() => new API());
-  const [form, setForm] = useState({ dateTag: "24h" });
+  const [form, setForm] = useState({ dateTag: "24h", severity: [] });
   const [sort, setSort] = useState({ sortBy: "time", sortDirection: "DESC" });
   const _sort = useCallback(({ sortBy, sortDirection }) => setSort({ sortBy, sortDirection }), []);
 
   useEffect(() => {
-    const { dateTag } = form;
-    let fet = api.getLogs({ dateTag });
+    const { dateTag, severity } = form;
+    let fet = api.getLogs({ dateTag, severity });
     setLoading(true);
     fet.then(data => {
       setData(List(data));
       _.delay(() => setLoading(false), 300);
     });
     return () => fet && fet.abort();
-  }, [form.dateTag]);
+  }, [form.dateTag, form.severity]);
 
   const onSubmit = useCallback(form => setForm(form), []);
-
   const sortData = useMemo(() => {
     const { sortDirection, sortBy } = sort;
     const direction = _.toLower(sortDirection) === "desc" ? -1 : 1;

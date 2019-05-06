@@ -11,8 +11,8 @@ export default class API {
     };
     return this.RESTfulCall(url, option);
   };
-  getLogs = ({ dateTag }) => {
-    return this.RESTfulCall(`/logs`, { dateTag });
+  getLogs = ({ dateTag, severity }) => {
+    return this.RESTfulCall(`/logs`, { dateTag, severity });
   };
   RESTfulCall = (url, options) => {
     const fet = AbortController(

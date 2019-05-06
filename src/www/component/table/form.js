@@ -1,15 +1,11 @@
-import React, { useEffect, useMemo } from "react";
-// import TagSelect from "../../../components/tag-select";
+import React, { useEffect, useCallback, useRef } from "react";
 import _ from "lodash";
-import { Input } from "antd";
-import { Select, DatePicker } from "antd";
 import { Row } from "antd";
+import { Select } from "antd";
 import styles from "./form.cssm";
 import useMerge from "react-hooks/useMerge.js";
-const Search = Input.Search;
+import TagSelect, { Options as TagOptions } from "Components/react-tag-select";
 const Option = Select.Option;
-const { RangePicker } = DatePicker;
-const dateFormat = "YYYY/MM/DD";
 const today = moment();
 
 export const formDefault = props => {
@@ -54,18 +50,20 @@ Form.defaultProps = {
 };
 function Form(props) {
   const [form, setForm] = useMerge(formDefault(props));
-  const { dateRange, dateTag, severity, content } = form;
-  const onChangeDate = React.useCallback(dateRange => setForm({ dateRange, dateTag: "--" }), []);
-  const onTagChange = React.useCallback(severity => setForm({ severity }), []);
-  const onDateRangeChange = React.useCallback(key => {
-    const { startDate, endDate } = getDateRange(key);
-    setForm({ dateRange: [startDate, endDate], dateTag: key });
-  }, []);
-  const onSearch = React.useCallback(content => setForm({ content }), []);
+  const isMounted = useRef(false);
+  const { dateTag, severity, content } = form;
+  const onDateRangeChange = useCallback(key => setForm({ dateTag: key }), []);
+  const onTagChange = useCallback(severity => setForm({ severity }), []);
 
   useEffect(() => {
-    props.onSubmit(form);
-  }, [dateRange, dateTag, severity, content]);
+    if (isMounted.current) {
+      props.onSubmit(form);
+    }
+  }, [dateTag, severity, content]);
+
+  useEffect(() => {
+    isMounted.current = true;
+  }, []);
 
   return (
     <React.Fragment>
@@ -82,6 +80,14 @@ function Form(props) {
           <Option value="7d">7 days</Option>
           <Option value="1m">1 month</Option>
         </Select>
+      </Row>
+      <Row className={styles.timer}>
+        <h4 className={styles.label}>Severity:</h4>
+        <TagSelect onChange={onTagChange}>
+          <TagOptions value="info">Info</TagOptions>
+          <TagOptions value="warning">Warning</TagOptions>
+          <TagOptions value="error">Error</TagOptions>
+        </TagSelect>
       </Row>
     </React.Fragment>
   );
