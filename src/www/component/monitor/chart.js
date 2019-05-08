@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import ReactEchart from "Components/react-echart";
+import { Spin } from "antd";
 import _ from "lodash";
+
 Chart.defaultProps = {
   dataX: [],
   dataY: []
 };
 function Chart(props) {
-  const { dataY } = props;
+  const { dataY, loading } = props;
   const canvas = useRef(null);
   const isReady = useRef(false);
   useEffect(() => {
@@ -23,7 +25,11 @@ function Chart(props) {
       isReady.current = true;
     }
   }, [dataY]);
-  return <ReactEchart bodyStyle={{ height: 250 }} ref={canvas} />;
+  return (
+    <Spin spinning={loading}>
+      <ReactEchart bodyStyle={{ height: 250 }} ref={canvas} />
+    </Spin>
+  );
 }
 
 export default React.memo(Chart);

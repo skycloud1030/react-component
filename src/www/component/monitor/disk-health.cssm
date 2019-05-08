@@ -4,6 +4,7 @@
   border: solid 1px #c3c3c3;
   box-sizing: border-box;
   border-radius: 4px;
+  overflow-x: auto;
 }
 
 .machinecontainer {
@@ -18,7 +19,7 @@
   width: 12.5%;
   height: 100%;
   max-width: 60px;
-  min-width: 6px;
+  min-width: 30px;
 }
 
 .flashcontainer {
@@ -72,7 +73,7 @@
   display: -ms-grid;
 }
 
-@media only screen and (max-width: 1200px) {
+/* @media only screen and (max-width: 1200px) {
   .bay {
     display: none;
   }
@@ -82,7 +83,7 @@
   .unknown {
     background-color: #c3c3c3;
   }
-}
+} */
 
 .flashContent .header {
   width: 100%;
@@ -115,3 +116,22 @@
   vertical-align: middle;
   border-radius: 50%;
 }
+
+/* .machine::-webkit-scrollbar {
+  width: 18px;
+  height: 12px;
+}
+
+.machine::-webkit-scrollbar-thumb {
+  width: 12px;
+  height: 12px;
+  background: #c6c7ca
+}
+
+.machine::-webkit-scrollbar-thumb:hover {
+  background: #737373;
+}
+
+.machine::-webkit-scrollbar-track {
+  background: #f0f2f5;
+} */

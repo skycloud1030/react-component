@@ -15,7 +15,7 @@ function iops(state = {}, action) {
   switch (action.type) {
     case "SET_IOPS": {
       let { type, ...rest } = action;
-      return { ...state, ...rest };
+      return { ...state, loading: false, ...rest };
     }
     default:
       return state;
@@ -26,7 +26,7 @@ function bandwidth(state = {}, action) {
   switch (action.type) {
     case "SET_BANDWIDTH": {
       let { type, ...rest } = action;
-      return { ...state, ...rest };
+      return { ...state, loading: false, ...rest };
     }
     default:
       return state;
@@ -37,7 +37,7 @@ function latency(state = {}, action) {
   switch (action.type) {
     case "SET_LATENCY": {
       let { type, ...rest } = action;
-      return { ...state, ...rest };
+      return { ...state, loading: false, ...rest };
     }
     default:
       return state;

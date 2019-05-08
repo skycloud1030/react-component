@@ -68,7 +68,7 @@ function C_IOPS() {
         }
       }
     };
-    return <Chart dataY={state.iops.dataY} options={options} />;
+    return <Chart dataY={state.iops.dataY} options={options} loading={state.iops.loading} />;
   }, [state.iops.dataY]);
 }
 
@@ -91,7 +91,7 @@ function C_BandWidth() {
         }
       }
     };
-    return <Chart dataY={state.bandwidth.dataY} options={options} />;
+    return <Chart dataY={state.bandwidth.dataY} options={options} loading={state.bandwidth.loading} />;
   }, [state.bandwidth.dataY]);
 }
 
@@ -114,7 +114,7 @@ function C_Latency() {
         }
       }
     };
-    return <Chart dataY={state.latency.dataY} options={options} />;
+    return <Chart dataY={state.latency.dataY} options={options} loading={state.latency.loading} />;
   }, [state.latency.dataY]);
 }
 

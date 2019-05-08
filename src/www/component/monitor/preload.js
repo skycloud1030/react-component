@@ -5,9 +5,9 @@ const initialState = {
     temperature: [],
     fan: []
   },
-  iops: { dataY: [] },
-  bandwidth: { dataY: [] },
-  latency: { dataY: [] }
+  iops: { dataY: [], loading: true },
+  bandwidth: { dataY: [], loading: true },
+  latency: { dataY: [], loading: true }
 };
 
 export default initialState;
