@@ -42,7 +42,7 @@ var config = {
       inject: true,
       entry: {
         icon: ["@ant-design/icons/lib/dist.js"],
-        common: ["faker"]
+        common: ["faker", "recharts"]
       }
     }),
     new MiniCssExtractPlugin({
@@ -73,10 +73,7 @@ var config = {
         loader: "babel-loader",
         query: {
           cacheDirectory: true,
-          presets: [
-            ["@babel/preset-env", { useBuiltIns: "usage", corejs: 2 }],
-            "@babel/react"
-          ],
+          presets: [["@babel/preset-env", { useBuiltIns: "usage", corejs: 2 }], "@babel/react"],
           plugins: [
             ["import", { libraryName: "antd", libraryDirectory: "lib" }, "ant"],
             [
@@ -108,16 +105,9 @@ var config = {
             loader: "babel-loader",
             query: {
               cacheDirectory: true,
-              presets: [
-                ["@babel/preset-env", { useBuiltIns: "usage", corejs: 2 }],
-                "@babel/react"
-              ],
+              presets: [["@babel/preset-env", { useBuiltIns: "usage", corejs: 2 }], "@babel/react"],
               plugins: [
-                [
-                  "import",
-                  { libraryName: "antd", libraryDirectory: "lib" },
-                  "ant"
-                ],
+                ["import", { libraryName: "antd", libraryDirectory: "lib" }, "ant"],
                 [
                   "import",
                   {
@@ -173,13 +163,11 @@ var config = {
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader:
-          "url-loader?name=[path][name].[ext]&limit=50000&mimetype=application/octet-stream"
+        loader: "url-loader?name=[path][name].[ext]&limit=50000&mimetype=application/octet-stream"
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader:
-          "url-loader?name=[path][name].[ext]&limit=50000&mimetype=image/svg+xml"
+        loader: "url-loader?name=[path][name].[ext]&limit=50000&mimetype=image/svg+xml"
       }
     ]
   }

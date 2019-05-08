@@ -1,9 +1,12 @@
-import React, { useEffect, useState, useReducer, useMemo, useContext, useRef } from "react";
+import React, { useEffect, useState, useReducer, useMemo, useContext } from "react";
 import { Tabs } from "antd";
 import { Row, Col } from "antd";
 import { Fan, Power, Temperature } from "./hardware.js";
 import { Card } from "antd";
+import { List } from "immutable";
+import immutable from "immutable";
 import numeral from "numeral";
+import _ from "lodash";
 import Context from "./context.js";
 import reducer from "./reducer.js";
 import initialState from "./preload.js";
@@ -53,20 +56,7 @@ function C_IOPS() {
 
   return useMemo(() => {
     const options = {
-      grid: {
-        top: "10%",
-        left: "5%",
-        right: "5%",
-        containLabel: true
-      },
-      animation: false,
-      xAxis: { type: "time", splitLine: { show: false } },
-      yAxis: {
-        type: "value",
-        axisLabel: {
-          formatter: val => `${numeral(val).format("0.[00] a")}`
-        }
-      }
+      yFormat: val => `${numeral(val).format("0.[00] a")}`
     };
     return <Chart dataY={state.iops.dataY} options={options} loading={state.iops.loading} />;
   }, [state.iops.dataY]);
@@ -76,21 +66,9 @@ function C_BandWidth() {
   const { state } = useContext(Context);
   return useMemo(() => {
     const options = {
-      grid: {
-        top: "10%",
-        left: "5%",
-        right: "5%",
-        containLabel: true
-      },
-      animation: false,
-      xAxis: { type: "time", splitLine: { show: false } },
-      yAxis: {
-        type: "value",
-        axisLabel: {
-          formatter: val => `${numeral(val).format("0.[00] b")}`
-        }
-      }
+      yFormat: val => `${numeral(val).format("0.[00] b")}`
     };
+
     return <Chart dataY={state.bandwidth.dataY} options={options} loading={state.bandwidth.loading} />;
   }, [state.bandwidth.dataY]);
 }
@@ -99,23 +77,17 @@ function C_Latency() {
   const { state } = useContext(Context);
   return useMemo(() => {
     const options = {
-      grid: {
-        top: "10%",
-        left: "5%",
-        right: "5%",
-        containLabel: true
-      },
-      animation: false,
-      xAxis: { type: "time", splitLine: { show: false } },
-      yAxis: {
-        type: "value",
-        axisLabel: {
-          formatter: val => `${numeral(val / 1000).format("0.[00]")} ms`
-        }
-      }
+      yFormat: val => `${numeral(val / 1000).format("0.[00]")} ms`
     };
     return <Chart dataY={state.latency.dataY} options={options} loading={state.latency.loading} />;
   }, [state.latency.dataY]);
+}
+
+function dataLimit(data) {
+  if (immutable.isImmutable(data) && data.size > 120) {
+    data = data.shift(0);
+  }
+  return data;
 }
 
 function Monitor() {
@@ -132,28 +104,31 @@ function Monitor() {
   }, []);
 
   useEffect(() => {
-    let dataY = [];
+    let dataY = List([]);
     let iops = ws.addListener("iops", data => {
-      dataY = [...dataY, [data.t, data.r, data.w]];
-      dispatch({ type: "SET_IOPS", dataY });
+      dataY = dataY.push(data);
+      dataY = dataLimit(dataY);
+      dispatch({ type: "SET_IOPS", dataY: dataY.toArray() });
     });
     return () => iops && iops.remove();
   }, []);
 
   useEffect(() => {
-    let dataY = [];
+    let dataY = List([]);
     let bandwidth = ws.addListener("bandwidth", data => {
-      dataY = [...dataY, [data.t, data.r, data.w]];
-      dispatch({ type: "SET_BANDWIDTH", dataY });
+      dataY = dataY.push(data);
+      dataY = dataLimit(dataY);
+      dispatch({ type: "SET_BANDWIDTH", dataY: dataY.toArray() });
     });
     return () => bandwidth && bandwidth.remove();
   }, []);
 
   useEffect(() => {
-    let dataY = [];
+    let dataY = List([]);
     let latency = ws.addListener("latency", data => {
-      dataY = [...dataY, [data.t, data.r, data.w]];
-      dispatch({ type: "SET_LATENCY", dataY });
+      dataY = dataY.push(data);
+      dataY = dataLimit(dataY);
+      dispatch({ type: "SET_LATENCY", dataY: dataY.toArray() });
     });
     return () => latency && latency.remove();
   }, []);
