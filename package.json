@@ -10,12 +10,12 @@
     "build": "webpack --mode production --progress --color "
   },
   "dependencies": {
-    "antd": "^3.16.6",
+    "antd": "^3.17.0",
     "bytes": "^3.1.0",
     "bytes-10": "git+https://github.com/skycloud1030/bytes.js.git",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.4.0",
-    "dayjs": "^1.8.13",
+    "dayjs": "^1.8.14",
     "dygraphs": "git+https://github.com/skycloud1030/dygraphs.git#npm",
     "echarts": "^4.2.1",
     "faker": "^4.1.0",
@@ -39,7 +39,7 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-shields-badge": "^2.0.0",
-    "react-virtualized": "^9.21.0",
+    "react-virtualized": "^9.21.1",
     "recharts": "^1.5.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"

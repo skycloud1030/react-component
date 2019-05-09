@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useReducer, useMemo, useContext } from "react";
 import { Tabs } from "antd";
 import { Row, Col } from "antd";
-import { Fan, Power, Temperature } from "./hardware.js";
+import { Fan, Power } from "./hardware.js";
 import { Card } from "antd";
 import { List } from "immutable";
+import Temperature from "./temperature.js";
 import immutable from "immutable";
 import numeral from "numeral";
 import _ from "lodash";
@@ -135,7 +136,7 @@ function Monitor() {
 
   return (
     <Context.Provider value={{ state, dispatch }}>
-      <Tabs defaultActiveKey="disk" className={styles.tabs} animated={false}>
+      <Tabs defaultActiveKey="disk" className={styles.tabs} animated={false} destroyInactiveTabPane>
         <TabPane tab={<AccelIcon type="icon-hdd" className={styles.icon} />} key="disk">
           <Row className={styles.row}>
             <Col xs={24}>

@@ -105,14 +105,14 @@ export default function fetchFake(url, params) {
         ];
 
         const temperature = [
-          { key: "P1-DIMMA1 Temp", state: "ok", value: "32.000" },
-          { key: "P1-DIMMA2 Temp", state: "error", value: "50" },
-          { key: "P1-DIMMB1 Temp", state: "error", value: "60.000" },
-          { key: "P1-DIMMB2 Temp", state: "ok", value: "32.000" },
-          { key: "P1-DIMMC1 Temp", state: "ok", value: "31.000" },
-          { key: "P1-DIMMC2 Temp", state: "ok", value: "29.000" },
-          { key: "P1-DIMMD1 Temp", state: "ok", value: "29.000" },
-          { key: "P1-DIMMD2 Temp", state: "ok", value: "29.000" }
+          { key: "P1-DIMMA1", state: "ok", value: "32.000" },
+          { key: "P1-DIMMA2", state: "error", value: "50.000" },
+          { key: "P1-DIMMB1", state: "ok", value: "32.000" },
+          { key: "P1-DIMMB2", state: "ok", value: "32.000" },
+          { key: "P1-DIMMC1", state: "ok", value: "31.000" },
+          { key: "P1-DIMMC2", state: "error", value: "60.000" },
+          { key: "P1-DIMMD1", state: "ok", value: "29.000" },
+          { key: "P1-DIMMD2", state: "ok", value: "29.000" }
         ];
 
         const fan = [
