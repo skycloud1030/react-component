@@ -7,8 +7,8 @@ class WebSocketFake {
     this.emitter = new EventEmitter();
     setInterval(() => {
       let time = moment().unix();
-      let r = _.random(1024 * 1024);
-      let w = _.random(1024 * 1024);
+      let r = _.random(1024 * 512, 1024 * 1024);
+      let w = _.random(1024 * 512, 1024 * 1024);
       this.emitter.emit("iops", { t: time, r, w });
 
       this.emitter.emit("bandwidth", {
@@ -19,8 +19,8 @@ class WebSocketFake {
 
       this.emitter.emit("latency", {
         t: time,
-        r: _.random(1000),
-        w: _.random(1000)
+        r: _.random(300, 800),
+        w: _.random(300, 800)
       });
     }, 1000);
 
