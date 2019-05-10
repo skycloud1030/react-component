@@ -4,6 +4,7 @@ import { Row, Col } from "antd";
 import { Fan, Power } from "./hardware.js";
 import { Card } from "antd";
 import { List } from "immutable";
+import { BackTop } from "antd";
 import Temperature from "./temperature.js";
 import immutable from "immutable";
 import numeral from "numeral";
@@ -85,7 +86,7 @@ function C_Latency() {
 }
 
 function dataLimit(data) {
-  if (immutable.isImmutable(data) && data.size > 120) {
+  if (immutable.isImmutable(data) && data.size > 300) {
     data = data.shift(0);
   }
   return data;
@@ -171,6 +172,7 @@ function Monitor() {
           <C_Fan />
         </TabPane>
       </Tabs>
+      <BackTop />
     </Context.Provider>
   );
 }
