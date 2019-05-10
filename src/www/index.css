@@ -49,35 +49,6 @@ body {
   content: "";
 }
 
-/* body::-webkit-scrollbar,
-body div::-webkit-scrollbar {
-  width: 18px;
-  height: 12px;
+.ant-drawer-content {
+  background-color: rgba(256, 256, 256, 0.85);
 }
-body::-webkit-scrollbar-thumb,
-body div::-webkit-scrollbar-thumb {
-  width: 12px;
-  background: #737373;
-  border-radius: 8px;
-  border-left: 4px solid #b7b7b7;
-  border-right: 4px solid #b7b7b7;
-}
-body::-webkit-scrollbar-track,
-body div::-webkit-scrollbar-track {
-  background: #b7b7b7;
-} */
-
-/* ::-webkit-scrollbar {
-  height: 10px;
-  width: 10px;
-  border-radius: 4px;
-  background: transparent;
-  transition: all 0.3s ease;
-}
-::-webkit-scrollbar:hover {
-  background: #c6c7ca;
-}
-::-webkit-scrollbar-thumb {
-  background: #777779;
-  border-radius: 4px;
-} */
