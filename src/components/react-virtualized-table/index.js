@@ -78,5 +78,5 @@ function TableCompoent(props) {
   );
 }
 
-export { Column, sortHeaderRenderer };
+export { Column, sortHeaderRenderer, rowClassName };
 export default React.memo(TableCompoent);

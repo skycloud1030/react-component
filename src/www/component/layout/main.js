@@ -22,10 +22,16 @@ const Monitor = Loadable({
   loading: Loading
 });
 
+const Infinite = Loadable({
+  loader: () => import(/* webpackChunkName: "react-infinite" */ "../infinite/index.js"),
+  loading: Loading
+});
+
 const pathComponet = {
   "/dashboard": Dashboard,
   "/table": Table,
-  "/monitor": Monitor
+  "/monitor": Monitor,
+  "/test": Infinite
 };
 
 function Main(props) {
