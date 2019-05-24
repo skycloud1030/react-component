@@ -1,4 +1,6 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
+import "Components/react-virtualized-table";
+import { Spin } from "antd";
 import C_Sider from "../../container/layout/sider.js";
 import C_Header from "../../container/layout/header.js";
 import posed from "react-pose";
@@ -22,8 +24,8 @@ const Monitor = Loadable({
   loading: Loading
 });
 
-const Infinite = Loadable({
-  loader: () => import(/* webpackChunkName: "react-infinite" */ "../infinite/index.js"),
+const Infinitetable = Loadable({
+  loader: () => import(/* webpackChunkName: "react-infinitetable" */ "../infinite/index.js"),
   loading: Loading
 });
 
@@ -31,12 +33,13 @@ const pathComponet = {
   "/dashboard": Dashboard,
   "/table": Table,
   "/monitor": Monitor,
-  "/test": Infinite
+  "/infinitetable": Infinitetable
 };
 
 function Main(props) {
   const { match } = props;
   const { path = "" } = match;
+  const [loading, setLoading] = useState(true);
   const _renderContent = useMemo(() => {
     const Components = pathComponet[path] || Exception;
     return <Components {...props} />;
@@ -49,13 +52,19 @@ function Main(props) {
     });
   }, [path]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 100);
+  }, []);
+
   return (
     <section>
       <C_Sider />
       <Box pose="visible" initialPose="init">
         <section className={styles.content}>
           <C_Header />
-          <main className={styles.main}>{_renderContent}</main>
+          <main className={styles.main}>{!loading ? _renderContent : <Spin />}</main>
           <footer className={styles.footer} />
         </section>
       </Box>

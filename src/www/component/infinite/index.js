@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import _ from "lodash";
-import { Column, sortHeaderRenderer } from "Components/react-virtualized-table";
 import { InfiniteLoader, List as VList, AutoSizer, WindowScroller } from "react-virtualized";
 import { Card } from "antd";
 import { BackTop } from "antd";
@@ -13,11 +12,10 @@ function Test() {
   const [minimumBatchSize] = useState(100);
   const [remoteRowCount, setRemote] = useState(100);
 
-  const _isRowLoaded = ({ index }) => {
+  const _isRowLoaded = useCallback(({ index }) => {
     return !!loadedRowsMap[index];
-  };
-  const _loadMoreRows = ({ startIndex, stopIndex }) => {
-    console.log(startIndex, stopIndex);
+  }, []);
+  const _loadMoreRows = useCallback(({ startIndex, stopIndex }) => {
     let promiseResolver;
     for (var i = startIndex; i <= stopIndex; i++) {
       loadedRowsMap[i] = STATUS_LOADING;
@@ -31,33 +29,25 @@ function Test() {
       }
       setRowsMaps(loadedRowsMap);
       promiseResolver();
-    }, 1000);
+    }, 600);
 
     return new Promise(resolve => {
       promiseResolver = resolve;
     });
-  };
-  const _rowRenderer = ({ key, index, style }) => {
+  }, []);
+  const _rowRenderer = useCallback(({ key, index, style }) => {
     let content;
     if (loadedRowsMap[index] === STATUS_LOADED) {
       content = index;
     } else {
-      content = <div>Loading...</div>;
+      content = <div className="ant-card-loading-block" style={{ width: "100%" }} />;
     }
     return (
       <div key={key} style={style}>
         {content}
       </div>
     );
-  };
-
-  // useEffect(() => {
-  //   const unmount = () => {
-  //     window.scrollTo(0, 0);
-  //   };
-  //   window.addEventListener("beforeunload", unmount);
-  //   return () => window.removeEventListener("beforeunload", unmount);
-  // }, []);
+  }, []);
 
   return (
     <Card>

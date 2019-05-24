@@ -12,7 +12,7 @@ export const Router_List = () => (
       <Route exact path="/table" component={Main} />
       <Route exact path="/dashboard" component={Main} />
       <Route exact path="/monitor" component={Main} />
-      <Route exact path="/test" component={Main} />
+      <Route exact path="/infinitetable" component={Main} />
       <Route path="*" component={Route404} />
     </Switch>
   </ConnectedRouter>

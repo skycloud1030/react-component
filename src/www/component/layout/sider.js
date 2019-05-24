@@ -36,6 +36,10 @@ function Sider(props) {
           <Icon type="table" />
           Table
         </Menu.Item>
+        <Menu.Item key="/infinitetable">
+          <Icon type="interation" />
+          Infinite Table
+        </Menu.Item>
         <Menu.Item key="/dashboard">
           <Icon type="dashboard" />
           Dasboard
