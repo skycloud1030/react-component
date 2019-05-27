@@ -17,6 +17,9 @@ export default class API {
   getIOPS = () => {
     return this.RESTfulCall(`/iops`);
   };
+  getInfiniteLogs = ({ endDate }) => {
+    return this.RESTfulCall(`/infinite`, { endDate });
+  };
   RESTfulCall = (url, options) => {
     const fet = AbortController(
       fetchFake(`/api${url}`, options)

@@ -140,4 +140,5 @@ function TableCompoent() {
   );
 }
 
+export { cellRenderer };
 export default React.memo(TableCompoent);

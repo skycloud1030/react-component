@@ -34,7 +34,7 @@ const getDateRange = key => {
   return { startDate, endDate, count };
 };
 
-export default function fetchFake(url, params) {
+export default function fetchFake(url, params = {}) {
   return new Promise(resolve => {
     switch (url) {
       case "/api/logs": {
@@ -79,6 +79,28 @@ export default function fetchFake(url, params) {
           ipv6: faker.internet.ipv6(),
           model: "P710"
         };
+        resolve(data);
+        break;
+      }
+      case "/api/infinite": {
+        const { count = 100, endDate = moment() } = params;
+        let data = _.times(count, () => {
+          const machine = faker.random.arrayElement(machine_list);
+          return {
+            name: machine.name,
+            ip: machine.ip,
+            catalog: faker.random.arrayElement(catalog),
+            content: faker.hacker.phrase(),
+            level: faker.random.arrayElement(level),
+            time: faker.date.between(
+              endDate
+                .clone()
+                .subtract(1, "hour")
+                .format("YYYY-MM-DD HH:mm:ss"),
+              endDate.format("YYYY-MM-DD HH:mm:ss")
+            )
+          };
+        });
         resolve(data);
         break;
       }
