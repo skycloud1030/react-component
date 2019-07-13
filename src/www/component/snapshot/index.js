@@ -28,7 +28,7 @@ function FaceDetect() {
           defaultValue={600}
           max={1500}
           min={50}
-          marks={{ 1000: "1000", 50: "50" }}
+          marks={{ 1500: "1500", 50: "50" }}
           onAfterChange={onAfterChange}
           style={{ width: 200 }}
         />
