@@ -10,22 +10,34 @@ import Exception from "Components/exception/index.js";
 import Loading from "Components/loading";
 
 const Dashboard = Loadable({
-  loader: () => import(/* webpackChunkName: "react-dashboard" */ "../dashboard/index.js"),
+  loader: () =>
+    import(/* webpackChunkName: "react-dashboard" */ "../dashboard/index.js"),
   loading: Loading
 });
 
 const Table = Loadable({
-  loader: () => import(/* webpackChunkName: "react-table" */ "../table/index.js"),
+  loader: () =>
+    import(/* webpackChunkName: "react-table" */ "../table/index.js"),
   loading: Loading
 });
 
 const Monitor = Loadable({
-  loader: () => import(/* webpackChunkName: "react-monitor" */ "../monitor/index.js"),
+  loader: () =>
+    import(/* webpackChunkName: "react-monitor" */ "../monitor/index.js"),
   loading: Loading
 });
 
 const Infinitetable = Loadable({
-  loader: () => import(/* webpackChunkName: "react-infinitetable" */ "../infinite/index.js"),
+  loader: () =>
+    import(
+      /* webpackChunkName: "react-infinitetable" */ "../infinite/index.js"
+    ),
+  loading: Loading
+});
+
+const Snapshot = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "react-snapshot" */ "../snapshot/index.js"),
   loading: Loading
 });
 
@@ -33,7 +45,8 @@ const pathComponet = {
   "/dashboard": Dashboard,
   "/table": Table,
   "/monitor": Monitor,
-  "/infinitetable": Infinitetable
+  "/infinitetable": Infinitetable,
+  "/snapshot": Snapshot
 };
 
 function Main(props) {
@@ -64,7 +77,9 @@ function Main(props) {
       <Box pose="visible" initialPose="init">
         <section className={styles.content}>
           <C_Header />
-          <main className={styles.main}>{!loading ? _renderContent : <Spin />}</main>
+          <main className={styles.main}>
+            {!loading ? _renderContent : <Spin />}
+          </main>
           <footer className={styles.footer} />
         </section>
       </Box>

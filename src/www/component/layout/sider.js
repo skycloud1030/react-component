@@ -37,7 +37,7 @@ function Sider(props) {
           Table
         </Menu.Item>
         <Menu.Item key="/infinitetable">
-          <Icon type="interation" />
+          <Icon type="interaction" />
           Infinite Table
         </Menu.Item>
         <Menu.Item key="/dashboard">
@@ -47,6 +47,10 @@ function Sider(props) {
         <Menu.Item key="/monitor">
           <Icon type="cloud" />
           Monitor
+        </Menu.Item>
+        <Menu.Item key="/snapshot">
+          <Icon type="eye" />
+          Snapshot
         </Menu.Item>
       </Menu>
     );
