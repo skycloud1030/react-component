@@ -73,7 +73,7 @@ var config = {
         loader: "babel-loader",
         query: {
           cacheDirectory: true,
-          presets: [["@babel/preset-env", { useBuiltIns: "usage", corejs: 2 }], "@babel/react"],
+          presets: [["@babel/preset-env"], "@babel/react"],
           plugins: [
             ["import", { libraryName: "antd", libraryDirectory: "lib" }, "ant"],
             [
@@ -105,9 +105,13 @@ var config = {
             loader: "babel-loader",
             query: {
               cacheDirectory: true,
-              presets: [["@babel/preset-env", { useBuiltIns: "usage", corejs: 2 }], "@babel/react"],
+              presets: [["@babel/preset-env"], "@babel/react"],
               plugins: [
-                ["import", { libraryName: "antd", libraryDirectory: "lib" }, "ant"],
+                [
+                  "import",
+                  { libraryName: "antd", libraryDirectory: "lib" },
+                  "ant"
+                ],
                 [
                   "import",
                   {
@@ -138,8 +142,22 @@ var config = {
           {
             loader: "css-loader",
             options: {
-              modules: true,
-              localIdentName: "[name]_[local]_[hash:base64:5]"
+              modules: {
+                localIdentName: "[name]__[local]___[hash:base64:5]"
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.wasm$/,
+        type: "javascript/auto",
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "wasm/[name].[hash].[ext]",
+              publicPath: "../"
             }
           }
         ]
@@ -163,11 +181,13 @@ var config = {
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url-loader?name=[path][name].[ext]&limit=50000&mimetype=application/octet-stream"
+        loader:
+          "url-loader?name=[path][name].[ext]&limit=50000&mimetype=application/octet-stream"
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url-loader?name=[path][name].[ext]&limit=50000&mimetype=image/svg+xml"
+        loader:
+          "url-loader?name=[path][name].[ext]&limit=50000&mimetype=image/svg+xml"
       }
     ]
   }
