@@ -1,4 +1,4 @@
-var path = require("path");
+const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const AutoDllPlugin = require("autodll-webpack-plugin");
@@ -21,6 +21,7 @@ var config = {
   entry: {
     index: [path.resolve(__dirname, "src/www/index.js")]
   },
+  devtool: "cheap-eval-source-map",
   output: {
     publicPath: "./",
     path: path.resolve(__dirname, "docs"),
