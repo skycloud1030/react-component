@@ -23,7 +23,7 @@
     "history": "^4.10.1",
     "immutable": "^4.0.0-rc.12",
     "intersection-observer": "^0.9.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "numbro": "^2.2.0",
     "numeral": "^2.0.6",
     "object-hash": "^2.0.1",
